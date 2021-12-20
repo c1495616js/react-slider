@@ -1,36 +1,44 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+/* eslint-disable react/prop-types */
+import React, { ReactElement } from 'react';
 
-export default function App(): JSX.Element {
+// default arrows
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+
+import { CarouselImg, useCarousel } from '@/hooks';
+import Carousel from '@/components/base/Carousel/Carousel';
+
+function App(): ReactElement {
+  const images: CarouselImg[] = [
+    { name: '', path: 'https://source.unsplash.com/random/200×500' },
+    {
+      name: 'PASSION FLOWER',
+      path: 'https://source.unsplash.com/random/200×500/?fruit',
+    },
+    {
+      name: 'GINGER',
+      path: 'https://source.unsplash.com/random/200×500/?city',
+    },
+  ];
+  const props = useCarousel(images, false);
   return (
-    <div className="card bordered sm:card-side h-screen px-8">
-      <Helmet>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="React Website" />
-        <title>React Typescript Template</title>
-      </Helmet>
-      <figure className="h-screen flex items-center">
-        <img
-          src="https://picsum.photos/id/1005/400/250"
-          width="400"
-          height="250"
-          alt=""
-        />
-      </figure>
-      <div className="card-body justify-center">
-        <h2 className="card-title">React Typescript Template</h2>
-        <p>I am Jerry. A React Developer.</p>
-        <div className="card-actions">
-          <button className="btn btn-primary" type="button">
-            Get Started
-          </button>
-          <button className="btn btn-ghost" type="button">
-            More info
-          </button>
-        </div>
-      </div>
+    <div className="h-screen flex items-center justify-center">
+      <button
+        type="button"
+        className="btn btn-ghost w-[44px]"
+        onClick={props.handleClickPrev}
+      >
+        <ChevronLeftIcon />
+      </button>
+      <Carousel images={images} {...props} />
+      <button
+        type="button"
+        className="btn btn-ghost w-[44px]"
+        onClick={props.handleClickNext}
+      >
+        <ChevronRightIcon />
+      </button>
     </div>
   );
 }
+
+export default App;

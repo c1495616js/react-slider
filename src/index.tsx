@@ -2,9 +2,6 @@ import React, { FC } from 'react';
 import ReactDOM from 'react-dom';
 import { Toaster } from 'react-hot-toast';
 
-/** providers */
-import ReactQueryProvider from '@/api/react-query/ReactQueryProvider';
-
 import App from '@/App';
 import * as serviceWorker from './serviceWorker';
 import '@/styles/tailwind.css';
@@ -12,10 +9,8 @@ import reportWebVitals from './reportWebVitals';
 
 const Index: FC = ({ children }) => (
   <React.StrictMode>
-    <ReactQueryProvider>
-      {children}
-      <Toaster />
-    </ReactQueryProvider>
+    {children}
+    <Toaster />
   </React.StrictMode>
 );
 
